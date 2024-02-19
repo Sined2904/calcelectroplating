@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  tests:
+  install:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip 
-        pip install -r dveri/requirements.txt
+        pip install -r calc/requirements.txt
 
   build_backend_and_push_to_docker_hub:
       name: Push Docker image to DockerHub
