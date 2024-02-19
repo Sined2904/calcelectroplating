@@ -15,7 +15,7 @@ class TimeSerializer(serializers.ModelSerializer):
 
 
 class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):
-    """Сериализатор расчета времени."""
+    """Сериализатор материалов покрытия."""
 
     class Meta:
         model = ElectrochemicalEquivalents

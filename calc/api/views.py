@@ -2,8 +2,10 @@ from django.shortcuts import render
 from .models import Time, ElectrochemicalEquivalents
 from rest_framework.response import Response
 from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer
+from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class TimeViewSet(viewsets.ModelViewSet):
@@ -21,7 +23,6 @@ class TimeViewSet(viewsets.ModelViewSet):
                 m = m/1000
             if units_m == 'мг':
                 m = m/1000000
-
         if units_I != 'А' and I is not None: # Конвертер силы тока из мА в А
             I = I/1000
         if S != None: # Конвертер площади в м2
@@ -71,20 +72,24 @@ class TimeViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
             headers = self.get_success_headers(serializer.data)
-            return Response(f'Время в секундах - {t}', status=status.HTTP_201_CREATED, headers=headers)
+            minute = t/60
+            hours = minute/60
+            return Response(f"Время в секундах - {t}\n Время в минутах - {minute}\n Время в часах -  {hours}", status=status.HTTP_201_CREATED, headers=headers)
         except:
             return Exception #Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
 
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
-    """Вьюсет для списка электрохимических эквивалентов."""
+    """Вьюсет для списка материалов покрытия."""
 
     queryset = ElectrochemicalEquivalents.objects.all()
     serializer_class = ElectrochemicalEquivalentsSerializer
     permission_classes = (AllowAny,)
     pagination_class = None
-
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter,
+                       filters.OrderingFilter]
+    ordering_fields = ('name',)
+    search_fields = ('name', 'description')
+    filterset_class = ElectrochemicalEquivalentsFilter
+    http_method_names = ['get']
