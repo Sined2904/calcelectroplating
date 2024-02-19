@@ -73,11 +73,13 @@ class TimeViewSet(viewsets.ModelViewSet):
             print(2)
             serializer.is_valid(raise_exception=True)
             print(3)
-            serializer.save(t=float(t))
+            serializer.save(t=t)
             print(4)
             headers = self.get_success_headers(serializer.data)
             print(5)
-            return Response(f"Время в секундах - {t}", status=status.HTTP_201_CREATED, headers=headers)
+            minutes = t/60
+            hours = minutes/60
+            return Response(f"Время в секундах - {t}, в минутах - {minutes}, в часах - {hours}", status=status.HTTP_201_CREATED, headers=headers)
         except:
             return Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
 
