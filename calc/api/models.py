@@ -28,7 +28,7 @@ class Time(models.Model):
         verbose_name_plural = "Расчеты времени"
 
     def __str__(self):
-        return "Расчет времени покрытия"
+        return f"Расчет времени покрытия №{self.id}"
 
 class ElectrochemicalEquivalents(models.Model):
     """Модель электрохимических эквивалентов."""
