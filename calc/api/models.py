@@ -37,5 +37,5 @@ class ElectrochemicalEquivalents(models.Model):
 
     class Meta:
         ordering = ('name', 'q')
-        verbose_name = "Электрохимический эквивалент"
-        verbose_name_plural = "Электрохимические эквиваленты"
+        verbose_name = "Материал покрытия"
+        verbose_name_plural = "Материалы покрытия"
