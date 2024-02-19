@@ -32,8 +32,8 @@ class ElectrochemicalEquivalents(models.Model):
     """Модель электрохимических эквивалентов."""
 
     name = models.CharField('Название', max_length=50)
-    q = models.DecimalField('Электрохимический эквивалент', max_digits=12, decimal_places=3, blank=True, null=True)
-    p = models.DecimalField('Плотность покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
+    q = models.DecimalField('Электрохимический эквивалент (мг/кулон)', max_digits=12, decimal_places=3, blank=True, null=True)
+    p = models.DecimalField('Плотность покрытия (кг/м3)', max_digits=12, decimal_places=3, blank=True, null=True)
 
     class Meta:
         ordering = ('name', 'q')
