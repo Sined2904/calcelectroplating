@@ -90,6 +90,6 @@ class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter,
                        filters.OrderingFilter]
     ordering_fields = ('name',)
-    search_fields = ('name', 'description')
+    search_fields = ('name',)
     filterset_class = ElectrochemicalEquivalentsFilter
     http_method_names = ['get']
