@@ -11,7 +11,7 @@ class TimeSerializer(serializers.ModelSerializer):
         model = Time
         fields = ['id', 'm', 'units_m', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'j', 'units_j', 'p',
-                 'units_p', 'h', 'units_h']
+                 'units_p', 'h', 'units_h', 't']
 
 
 class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):
