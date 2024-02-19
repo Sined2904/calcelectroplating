@@ -68,10 +68,15 @@ class TimeViewSet(viewsets.ModelViewSet):
                 t = m/(j*S*q*wt)
             if m is not None and I is not None:
                 t = m/(I*q*wt)
+            print(1)
             serializer = self.get_serializer(data=request.data)
+            print(2)
             serializer.is_valid(raise_exception=True)
+            print(3)
             serializer.save(t=t)
+            print(4)
             headers = self.get_success_headers(serializer.data)
+            print(5)
             return Response(f"Время в секундах - {t}", status=status.HTTP_201_CREATED, headers=headers)
         except:
             return Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
