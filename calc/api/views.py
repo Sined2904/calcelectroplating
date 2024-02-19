@@ -72,12 +72,9 @@ class TimeViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
             headers = self.get_success_headers(serializer.data)
-            minute = t/60
-            hours = minute/60
-            return Response(f"Время в секундах - {t}\n Время в минутах - {minute}\n Время в часах -  {hours}", status=status.HTTP_201_CREATED, headers=headers)
+            return Response(f"Время в секундах - {t}", status=status.HTTP_201_CREATED, headers=headers)
         except:
             return Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
-
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
