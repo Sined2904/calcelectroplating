@@ -73,7 +73,7 @@ class TimeViewSet(viewsets.ModelViewSet):
             print(2)
             serializer.is_valid(raise_exception=True)
             print(3)
-            serializer.save(t=t)
+            serializer.save(t=float(t))
             print(4)
             headers = self.get_success_headers(serializer.data)
             print(5)
