@@ -76,7 +76,7 @@ class TimeViewSet(viewsets.ModelViewSet):
             hours = minute/60
             return Response(f"Время в секундах - {t}\n Время в минутах - {minute}\n Время в часах -  {hours}", status=status.HTTP_201_CREATED, headers=headers)
         except:
-            return Exception #Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
+            return Response(Exception, status=status.HTTP_200_OK)
 
 
 
