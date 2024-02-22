@@ -85,7 +85,7 @@ class TimeViewSet(viewsets.ModelViewSet):
             hours = minutes/60
             return Response(f"Время в секундах - {t}, в минутах - {minutes}, в часах - {hours}", status=status.HTTP_201_CREATED)
         except:
-            return Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
+            return Response(Exception, status=status.HTTP_200_OK)
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
@@ -136,4 +136,4 @@ class HeightViewSet(viewsets.ModelViewSet):
             headers = self.get_success_headers(serializer.data)
             return Response(h, status=status.HTTP_201_CREATED, headers=headers)
         except:
-            return Response('Ошибка при вычислении, проверьте данные', status=status.HTTP_200_OK)
+            return Response(Exception, status=status.HTTP_200_OK)
