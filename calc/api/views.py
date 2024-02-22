@@ -134,6 +134,6 @@ class HeightViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(h=h)
             headers = self.get_success_headers(serializer.data)
-            return Response(h, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(f'{h}', status=status.HTTP_201_CREATED, headers=headers)
         except:
             return Response(Exception, status=status.HTTP_200_OK)
