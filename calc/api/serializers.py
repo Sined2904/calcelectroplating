@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.db.models import Max, Min
 
-from .models import Time, ElectrochemicalEquivalents
+from .models import Time, ElectrochemicalEquivalents, Height
 
 
 class TimeSerializer(serializers.ModelSerializer):
@@ -20,3 +20,13 @@ class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):
     class Meta:
         model = ElectrochemicalEquivalents
         fields = ['name', 'q', 'p']
+
+
+class HeightSerializer(serializers.ModelSerializer):
+    """Сериализатор расчета толщины."""
+
+    class Meta:
+        model = Height
+        fields = ['id', 'm', 'units_m', 'I', 'units_I', 'q', 'units_q',
+                 'wt', 'S', 'units_S', 'p',
+                 'units_p', 't', 'units_t', 'v', 'units_v', 'h']
