@@ -40,7 +40,7 @@ def converter(self, m, units_m, I, units_I, S, units_S, j, units_j, p, units_p, 
         if units_q == 'мг/Кл':
             q = q/1000000
         if units_q == 'г/(А∙ч)':
-            q = q/3600*1000
+            q = (q/3600*1000)/1000000
     if t != None: # Конвертер времени из часов и минут в секунды
         if units_t == 'ч':
             t = t*3600
