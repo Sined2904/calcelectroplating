@@ -9,9 +9,9 @@ class TimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Time
-        fields = ['id', 'm', 'units_m', 'I', 'units_I', 'q', 'units_q',
+        fields = ['m', 'units_m', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'j', 'units_j', 'p',
-                 'units_p', 'h', 'units_h', 't']
+                 'units_p', 'h', 'units_h']
 
 
 class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):
@@ -27,6 +27,6 @@ class HeightSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Height
-        fields = ['id', 'm', 'units_m', 'I', 'units_I', 'q', 'units_q',
+        fields = ['m', 'units_m', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'p',
                  'units_p', 't', 'units_t', 'v', 'units_v', 'h']
