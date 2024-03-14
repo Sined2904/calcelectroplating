@@ -11,7 +11,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 def converter_m(m, units_m):
     """Конвертер из грамм и милиграмм в кг."""
     if m != None:
-        if units_m == 'гр':
+        if units_m == 'г':
             m = m/1000
         if units_m == 'мг':
             m = m/1000000
