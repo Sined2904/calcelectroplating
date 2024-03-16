@@ -11,7 +11,27 @@ class TimeSerializer(serializers.ModelSerializer):
         model = Time
         fields = ['m', 'units_m', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'j', 'units_j', 'p',
-                 'units_p', 'h', 'units_h']
+                 'units_p', 'h', 'units_h', 't']
+
+
+class TimeSerializerOutput(serializers.ModelSerializer):
+    """Сериализатор расчета времени (возврат результата)."""
+    t = serializers.SerializerMethodField()
+    t_min = serializers.SerializerMethodField()
+    t_hour = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Time
+        fields = ['t', 't_min', 't_hour']
+
+    def get_t(self, object):
+        return object.t
+
+    def get_t_min(self, object):
+        return object.t/60
+
+    def get_t_hour(self, object):
+        return object.t/3600
 
 
 class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):

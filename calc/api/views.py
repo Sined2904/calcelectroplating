@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Time, ElectrochemicalEquivalents, Height
 from rest_framework.response import Response
-from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer
+from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput
 from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
@@ -122,11 +122,9 @@ class TimeViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
             #headers = self.get_success_headers(serializer.data)
-            minutes = t/60
-            hours = minutes/60
-            return Response(f"Время в секундах - {t}, в минутах - {minutes}, в часах - {hours}", status=status.HTTP_201_CREATED)
+            return Response(TimeSerializerOutput(Time.objects.last()).data, status=status.HTTP_201_CREATED)
         except:
-            return Response(Exception, status=status.HTTP_200_OK)
+            return Response(Exception, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
