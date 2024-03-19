@@ -130,8 +130,6 @@ REST_FRAMEWORK = {
 }
 
 
-]
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
