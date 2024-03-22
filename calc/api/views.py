@@ -118,6 +118,8 @@ class TimeViewSet(viewsets.ModelViewSet):
                 t = m/(j*S*q*wt)
             if m is not None and I is not None:
                 t = m/(I*q*wt)
+            if t<0.1:
+                raise ValueError('ответ меньше 0.1 сек')
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
