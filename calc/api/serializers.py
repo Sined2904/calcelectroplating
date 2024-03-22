@@ -25,13 +25,13 @@ class TimeSerializerOutput(serializers.ModelSerializer):
         fields = ['t', 't_min', 't_hour']
 
     def get_t(self, object):
-        return object.t
+        return round(object.t%60)
 
     def get_t_min(self, object):
-        return object.t/60
+        return round(object.t//60)
 
     def get_t_hour(self, object):
-        return object.t/3600
+        return round(object.t//3600)
 
 
 class ElectrochemicalEquivalentsSerializer(serializers.ModelSerializer):

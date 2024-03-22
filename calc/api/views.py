@@ -54,7 +54,7 @@ def converter_p(p, units_p):
     """Конвертер плотности покрытия."""
 
     if p != None:
-        if units_p == 'гр/см3':
+        if units_p == 'г/см3':
             p = p*1000
     return p
 
