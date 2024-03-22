@@ -28,7 +28,7 @@ class TimeSerializerOutput(serializers.ModelSerializer):
         return round(object.t%60)
 
     def get_t_min(self, object):
-        return round(object.t//60)
+        return ((object.t//60)%60)*60
 
     def get_t_hour(self, object):
         return round(object.t//3600)
