@@ -6,6 +6,8 @@ from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import ValidationError
+from django.http import HttpResponse
 
 
 def converter_m(m, units_m):
@@ -118,15 +120,14 @@ class TimeViewSet(viewsets.ModelViewSet):
                 t = m/(j*S*q*wt)
             if m is not None and I is not None:
                 t = m/(I*q*wt)
-            if t<0.1:
-                raise ValueError('ответ меньше 0.1 сек')
+            if t<1:
+                raise ValidationError('Ответ меньше секунды!')
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
-            #headers = self.get_success_headers(serializer.data)
             return Response(TimeSerializerOutput(Time.objects.last()).data, status=status.HTTP_201_CREATED)
-        except:
-            return Response(Exception, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        except Exception:
+            raise ValidationError('Ответ меньше секунды!')
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
