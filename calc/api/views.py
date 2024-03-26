@@ -8,6 +8,13 @@ from rest_framework.permissions import AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.exceptions import ValidationError
 from django.http import HttpResponse
+from rest_framework.exceptions import APIException
+
+
+class AnswerLessOne(APIException):
+    status_code = 400
+    default_detail = 'Ответ меньше одной секунды'
+    default_code = 'answer_less_one'
 
 
 def converter_m(m, units_m):
@@ -120,14 +127,17 @@ class TimeViewSet(viewsets.ModelViewSet):
                 t = m/(j*S*q*wt)
             if m is not None and I is not None:
                 t = m/(I*q*wt)
+            print(t)
             if t<1:
-                raise ValidationError('Ответ меньше секунды!')
+                raise AnswerLessOne()
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(t=t)
             return Response(TimeSerializerOutput(Time.objects.last()).data, status=status.HTTP_201_CREATED)
-        except Exception:
-            raise ValidationError('Ответ меньше секунды!')
+        except AnswerLessOne:
+            raise AnswerLessOne('Ответ меньше секунды!')
+        except Exception as err:
+            return HttpResponse(f'При обработке возникла ошибка: {err}')
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
@@ -165,7 +175,7 @@ class HeightViewSet(viewsets.ModelViewSet):
             t = converter_t(request.data['t'], request.data['units_t'])
             wt = request.data['wt']
             if m != None:
-                h = m/p*S
+                h = m/(p*S)
             else:
                 if j != None:
                     h = (t*j*q*wt)/p
@@ -176,5 +186,5 @@ class HeightViewSet(viewsets.ModelViewSet):
             serializer.save(h=h)
             headers = self.get_success_headers(serializer.data)
             return Response(f'{h}', status=status.HTTP_201_CREATED, headers=headers)
-        except:
-            return Response(Exception, status=status.HTTP_200_OK)
+        except Exception as err:
+            raise ValidationError(f'{err}')
