@@ -184,7 +184,9 @@ class HeightViewSet(viewsets.ModelViewSet):
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(h=h)
+            print(h)
             headers = self.get_success_headers(serializer.data)
+            print(Height.objects.last())
             return Response(HeigthSerializerOutput(Height.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

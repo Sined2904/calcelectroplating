@@ -22,7 +22,7 @@ class Time(models.Model):
     t = models.DecimalField('Время', max_digits=15, decimal_places=4, blank=True, null=True)
 
     class Meta:
-        ordering = ('-id', )
+        ordering = ('id', )
         verbose_name = "Расчет времени"
         verbose_name_plural = "Расчеты времени"
 
@@ -69,7 +69,7 @@ class Height(models.Model):
     h = models.DecimalField('Толщина покрытия (в метрах)', max_digits=15, decimal_places=4, blank=True, null=True)    
 
     class Meta:
-        ordering = ('-id', )
+        ordering = ('id', )
         verbose_name = "Расчет толщины покрытия"
         verbose_name_plural = "Расчеты толщин покрытия"
 
