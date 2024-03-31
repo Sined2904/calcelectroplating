@@ -16,6 +16,7 @@ class TimeSerializer(serializers.ModelSerializer):
 
 class TimeSerializerOutput(serializers.ModelSerializer):
     """Сериализатор расчета времени (возврат результата)."""
+
     t = serializers.SerializerMethodField()
     t_min = serializers.SerializerMethodField()
     t_hour = serializers.SerializerMethodField()
@@ -50,3 +51,24 @@ class HeightSerializer(serializers.ModelSerializer):
         fields = ['m', 'units_m', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'p',
                  'units_p', 't', 'units_t', 'v', 'units_v', 'h']
+
+
+class HeigthSerializerOutput(serializers.ModelSerializer):
+    """Сериализатор расчета толщины (возврат результата)."""
+    
+    h_m = serializers.SerializerMethodField()
+    h_milli = serializers.SerializerMethodField()
+    h_micro = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Time
+        fields = ['h_m', 'h_milli', 'h_micro']
+
+    def get_h_m(self, object):
+        return round(object.h, 6)
+
+    def get_h_milli(self, object):
+        return round(object.h*1000, 6)
+
+    def get_h_micro(self, object):
+        return round(object.h*1000000, 6)

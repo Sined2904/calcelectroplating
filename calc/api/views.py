@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Time, ElectrochemicalEquivalents, Height
 from rest_framework.response import Response
-from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput
+from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput, HeigthSerializerOutput
 from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
@@ -185,6 +185,6 @@ class HeightViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(h=h)
             headers = self.get_success_headers(serializer.data)
-            return Response(f'{h}', status=status.HTTP_201_CREATED, headers=headers)
+            return Response(HeigthSerializerOutput(Height.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
-            raise ValidationError(f'{err}')
+            return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
