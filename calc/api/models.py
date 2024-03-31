@@ -22,7 +22,7 @@ class Time(models.Model):
     t = models.DecimalField('Время', max_digits=15, decimal_places=4, blank=True, null=True)
 
     class Meta:
-        ordering = ('id', )
+        ordering = ('-id', )
         verbose_name = "Расчет времени"
         verbose_name_plural = "Расчеты времени"
 
@@ -49,27 +49,27 @@ class ElectrochemicalEquivalents(models.Model):
 class Height(models.Model):
     """Модель расчета толщины покрытия."""
 
-    v = models.DecimalField('Скорость осаждения', max_digits=12, decimal_places=3, blank=True, null=True)
+    v = models.DecimalField('Скорость осаждения', max_digits=15, decimal_places=4, blank=True, null=True)
     units_v = models.CharField('Единицы скорости осаждения', max_length=50, blank=True, null=True)
-    j = models.DecimalField('Плотность тока', max_digits=12, decimal_places=3, blank=True, null=True)
+    j = models.DecimalField('Плотность тока', max_digits=15, decimal_places=4, blank=True, null=True)
     units_j = models.CharField('Единицы плотности тока', max_length=50, blank=True, null=True)
-    t = models.DecimalField('Время покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
+    t = models.DecimalField('Время покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_t = models.CharField('Единицы времени покрытия', max_length=50, blank=True, null=True)
-    p = models.DecimalField('Плотность покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
+    p = models.DecimalField('Плотность покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_p = models.CharField('Единицы плотности покрытия', max_length=50, blank=True, null=True)
-    q = models.DecimalField('Электрохимический эквивалент', max_digits=12, decimal_places=3, blank=True, null=True)
+    q = models.DecimalField('Электрохимический эквивалент', max_digits=15, decimal_places=4, blank=True, null=True)
     units_q = models.CharField('Единицы электрохимического эквивалента', max_length=50, blank=True, null=True)
-    wt = models.DecimalField('Выход по току', max_digits=12, decimal_places=3, blank=True, null=True)
-    I = models.DecimalField('Сила тока', max_digits=12, decimal_places=3, blank=True, null=True)
+    wt = models.DecimalField('Выход по току', max_digits=15, decimal_places=4, blank=True, null=True)
+    I = models.DecimalField('Сила тока', max_digits=15, decimal_places=4, blank=True, null=True)
     units_I = models.CharField('Единицы силы тока', max_length=50, blank=True, null=True)
-    S = models.DecimalField('Площадь покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
+    S = models.DecimalField('Площадь покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_S = models.CharField('Единицы площади', max_length=50, blank=True, null=True)
-    m = models.DecimalField('Масса покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
+    m = models.DecimalField('Масса покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_m = models.CharField('Единицы массы покрытия', max_length=50, blank=True, null=True)
-    h = models.DecimalField('Толщина покрытия', max_digits=12, decimal_places=3, blank=True, null=True)    
+    h = models.DecimalField('Толщина покрытия (в метрах)', max_digits=15, decimal_places=4, blank=True, null=True)    
 
     class Meta:
-        ordering = ('id', )
+        ordering = ('-id', )
         verbose_name = "Расчет толщины покрытия"
         verbose_name_plural = "Расчеты толщин покрытия"
 
