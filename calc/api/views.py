@@ -137,7 +137,7 @@ class TimeViewSet(viewsets.ModelViewSet):
         except AnswerLessOne:
             raise AnswerLessOne('Ответ меньше секунды!')
         except Exception as err:
-            return HttpResponse(f'При обработке возникла ошибка: {err}')
+            return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
