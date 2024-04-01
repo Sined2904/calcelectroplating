@@ -190,3 +190,4 @@ class HeightViewSet(viewsets.ModelViewSet):
             return Response(HeigthSerializerOutput(Height.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
