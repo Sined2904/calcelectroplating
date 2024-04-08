@@ -155,6 +155,7 @@ class ElectrochemicalEquivalentsViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 
 
+
 class HeightViewSet(viewsets.ModelViewSet):
     """Вьюсет для расчета толщины покрытия."""
 
