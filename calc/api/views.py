@@ -223,3 +223,4 @@ class WeightViewSet(viewsets.ModelViewSet):
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
