@@ -82,3 +82,11 @@ class WeightSerializer(serializers.ModelSerializer):
         fields = ['h', 'units_h', 'I', 'units_I', 'q', 'units_q',
                  'wt', 'S', 'units_S', 'p',
                  'units_p', 't', 'units_t']
+
+
+class WeigthSerializerOutput(serializers.ModelSerializer):
+    """Сериализатор расчета массы (возврат результата)."""
+
+    class Meta:
+        model = Weight
+        fields = ['m']
