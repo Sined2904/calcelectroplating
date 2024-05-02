@@ -66,7 +66,7 @@ class Height(models.Model):
     units_S = models.CharField('Единицы площади', max_length=50, blank=True, null=True)
     m = models.DecimalField('Масса покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_m = models.CharField('Единицы массы покрытия', max_length=50, blank=True, null=True)
-    h = models.DecimalField('Толщина покрытия (в метрах)', max_digits=15, decimal_places=4, blank=True, null=True)    
+    h = models.DecimalField('Толщина покрытия (в мкм)', max_digits=15, decimal_places=4, blank=True, null=True)    
 
     class Meta:
         ordering = ('id', )
@@ -95,7 +95,7 @@ class Weight(models.Model):
     units_p = models.CharField('Единицы плотности покрытия', max_length=50, blank=True, null=True)
     h = models.DecimalField('Толщина покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_h = models.CharField('Единицы толщины покрытия', max_length=50, blank=True, null=True)
-    m = models.DecimalField('Масса покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
+    m = models.DecimalField('Масса покрытия (в мг)', max_digits=15, decimal_places=4, blank=True, null=True)
 
     class Meta:
         ordering = ('id', )

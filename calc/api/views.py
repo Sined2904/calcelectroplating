@@ -182,13 +182,10 @@ class HeightViewSet(viewsets.ModelViewSet):
                     h = (t*j*q*wt)/p
                 else:
                     h = (t*I*q*wt)/p*S
-                    print(h)
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.save(h=h)
-            print(h)
+            serializer.save(h=h*1000000) #Перевод в микрометры
             headers = self.get_success_headers(serializer.data)
-            print(Height.objects.last())
             return Response(HeigthSerializerOutput(Height.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -221,7 +218,7 @@ class WeightViewSet(viewsets.ModelViewSet):
                 m = j*S*t*q*wt
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.save(m=m)
+            serializer.save(m=m*1000000) #Перевод в мг
             return Response(WeigthSerializerOutput(Weight.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

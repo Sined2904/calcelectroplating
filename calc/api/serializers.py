@@ -55,23 +55,10 @@ class HeightSerializer(serializers.ModelSerializer):
 
 class HeigthSerializerOutput(serializers.ModelSerializer):
     """Сериализатор расчета толщины (возврат результата)."""
-    
-    h_m = serializers.SerializerMethodField()
-    h_milli = serializers.SerializerMethodField()
-    h_micro = serializers.SerializerMethodField()
 
     class Meta:
         model = Time
-        fields = ['h_m', 'h_milli', 'h_micro']
-
-    def get_h_m(self, object):
-        return round(object.h, 6)
-
-    def get_h_milli(self, object):
-        return round(object.h*1000, 6)
-
-    def get_h_micro(self, object):
-        return round(object.h*1000000, 6)
+        fields = ['h']
 
 
 class WeightSerializer(serializers.ModelSerializer):
