@@ -182,6 +182,7 @@ class HeightViewSet(viewsets.ModelViewSet):
                     h = (t*j*q*wt)/p
                 else:
                     h = (t*I*q*wt)/p*S
+                    print(h)
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(h=h)
