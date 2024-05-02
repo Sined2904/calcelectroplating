@@ -96,7 +96,7 @@ class Weight(models.Model):
     h = models.DecimalField('Толщина покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
     units_h = models.CharField('Единицы толщины покрытия', max_length=50, blank=True, null=True)
     m = models.DecimalField('Масса покрытия', max_digits=12, decimal_places=3, blank=True, null=True)
- 
+
     class Meta:
         ordering = ('id', )
         verbose_name = "Расчет массы покрытия"

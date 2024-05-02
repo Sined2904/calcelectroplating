@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Time, ElectrochemicalEquivalents, Height
+from .models import Time, ElectrochemicalEquivalents, Height, Weight
 from rest_framework.response import Response
-from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput, HeigthSerializerOutput
+from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput, HeigthSerializerOutput, WeightSerializer
 from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
@@ -189,6 +189,45 @@ class HeightViewSet(viewsets.ModelViewSet):
             headers = self.get_success_headers(serializer.data)
             print(Height.objects.last())
             return Response(HeigthSerializerOutput(Height.objects.last()).data, status=status.HTTP_201_CREATED)
+        except Exception as err:
+            return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class WeightViewSet(viewsets.ModelViewSet):
+    """Вьюсет для расчета времени."""
+
+    queryset = Weight.objects.all()
+    serializer_class = WeightSerializer
+    permission_classes = (AllowAny,)
+    pagination_class = None
+    http_method_names = ['post']
+
+    def create(self, request, *args, **kwargs):
+        try:
+            I = converter_I(request.data['I'], request.data['units_I'])
+            S = converter_S(request.data['S'], request.data['units_S'])
+            t = converter_t(request.data['t'], request.data['units_t'])
+            j = converter_j(request.data['j'], request.data['units_j'])
+            p = converter_p(request.data['p'], request.data['units_p'])
+            h = converter_h(request.data['h'], request.data['units_h'])
+            q = converter_q(request.data['q'], request.data['units_q'])
+            wt = request.data['wt']
+            print(1)
+            if h is not None:
+                print(2)
+                m = S*p*h
+            if I is not None:
+                m = I*t*q*wt
+            if j is not None:
+                m = j*S*t*q*wt
+            print(m)
+
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(m=m)
+            return HttpResponse(f'ответ {m}')#Response(TimeSerializerOutput(Time.objects.last()).data, status=status.HTTP_201_CREATED)
+        except AnswerLessOne:
+            raise AnswerLessOne('Ответ меньше секунды!')
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.db.models import Max, Min
 
-from .models import Time, ElectrochemicalEquivalents, Height
+from .models import Time, ElectrochemicalEquivalents, Height, Weight
 
 
 class TimeSerializer(serializers.ModelSerializer):
@@ -72,3 +72,13 @@ class HeigthSerializerOutput(serializers.ModelSerializer):
 
     def get_h_micro(self, object):
         return round(object.h*1000000, 6)
+
+
+class WeightSerializer(serializers.ModelSerializer):
+    """Сериализатор расчета массы."""
+
+    class Meta:
+        model = Weight
+        fields = ['h', 'units_h', 'I', 'units_I', 'q', 'units_q',
+                 'wt', 'S', 'units_S', 'p',
+                 'units_p', 't', 'units_t']
