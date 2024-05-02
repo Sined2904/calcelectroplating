@@ -9,7 +9,7 @@ app_name = 'api'
 router = DefaultRouter()
 
 
-router.register('time', TimeViewSet, basename='time')
+router.register('qwertime', TimeViewSet, basename='time')
 router.register('el_eqts', ElectrochemicalEquivalentsViewSet, basename='el_eqts')
 router.register('height', HeightViewSet, basename='height')
 router.register('mass', WeightViewSet, basename='mass')
