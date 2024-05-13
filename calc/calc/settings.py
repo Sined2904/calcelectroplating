@@ -15,7 +15,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 LOCAL_DB = bool(os.getenv('LOCAL_DB', default='False') == "True")
 
-CSRF_TRUSTED_ORIGINS = ["http://89.104.70.160", "http://127.0.0.1:8000"]
+CSRF_TRUSTED_ORIGINS = ["http://89.111.175.252", "http://127.0.0.1:8000"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -23,6 +23,7 @@ CORS_ALLOW_METHODS = [
     'GET',
     'POST',
 ]
+
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'API калькулятора гальваника',
