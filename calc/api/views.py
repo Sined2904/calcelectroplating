@@ -181,7 +181,7 @@ class HeightViewSet(viewsets.ModelViewSet):
                 if j != None:
                     h = (t*j*q*wt)/p
                 else:
-                    h = (t*I*q*wt)/p*S
+                    h = (t*I*q*wt)/(p*S)
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(h=h*1000000) #Перевод в микрометры
