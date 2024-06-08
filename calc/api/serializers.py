@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.db.models import Max, Min
 
-from .models import Time, ElectrochemicalEquivalents, Height, Weight
+from .models import Time, ElectrochemicalEquivalents, Height, Weight, CurrentDensity
 
 
 class TimeSerializer(serializers.ModelSerializer):
@@ -77,3 +77,25 @@ class WeigthSerializerOutput(serializers.ModelSerializer):
     class Meta:
         model = Weight
         fields = ['m']
+
+
+class CurrentDensitySerializer(serializers.ModelSerializer):
+    """Сериализатор расчета плотности тока."""
+
+    class Meta:
+        model = CurrentDensity
+        fields = ['I', 'units_I', 'S1', 'units_S1', 'S2', 'units_S2', 
+                  'S3', 'units_S3', 'S4', 'units_S4', 'S5', 'units_S5',
+                  'S6', 'units_S6', 'S7', 'units_S7', 'S8', 'units_S8',
+                  'S9', 'units_S9', 'S10', 'units_S10', 'S11', 'units_S11', 
+                  'S12', 'units_S12', 'S13', 'units_S13', 'S14', 'units_S14',
+                  'S15', 'units_S15', 'S16', 'units_S16', 'S17', 'units_S17',
+                  'S18', 'units_S18', 'S19', 'units_S19', 'S20', 'units_S20']
+
+
+class CurrentDensitySerializerOutput(serializers.ModelSerializer):
+    """Сериализатор расчета плотности тока (возврат результата)."""
+
+    class Meta:
+        model = CurrentDensity
+        fields = ['j']
