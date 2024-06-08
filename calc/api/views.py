@@ -305,6 +305,6 @@ class AmperageViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.save(I=I)
             headers = self.get_success_headers(serializer.data)
-            return Response(AmperageSerializerOutput(CurrentDensity.objects.last()).data, status=status.HTTP_201_CREATED)
+            return Response(AmperageSerializerOutput(Amperage.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
