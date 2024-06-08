@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Time, ElectrochemicalEquivalents, Height, Weight, CurrentDensity
+from .models import Time, ElectrochemicalEquivalents, Height, Weight, CurrentDensity, Amperage
 from rest_framework.response import Response
-from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput, HeigthSerializerOutput, WeightSerializer, WeigthSerializerOutput, CurrentDensitySerializer, CurrentDensitySerializerOutput
+from .serializers import TimeSerializer, ElectrochemicalEquivalentsSerializer, HeightSerializer, TimeSerializerOutput, HeigthSerializerOutput, WeightSerializer, WeigthSerializerOutput, CurrentDensitySerializer, CurrentDensitySerializerOutput, AmperageSerializer, AmperageSerializerOutput
 from .filters import ElectrochemicalEquivalentsFilter
 from rest_framework import viewsets, filters, status
 from rest_framework.permissions import AllowAny
@@ -264,5 +264,47 @@ class CurrentDensityViewSet(viewsets.ModelViewSet):
             serializer.save(j=j)
             headers = self.get_success_headers(serializer.data)
             return Response(CurrentDensitySerializerOutput(CurrentDensity.objects.last()).data, status=status.HTTP_201_CREATED)
+        except Exception as err:
+            return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class AmperageViewSet(viewsets.ModelViewSet):
+    """Вьюсет для расчета силы тока."""
+
+    queryset = Amperage.objects.all()
+    serializer_class = AmperageSerializer
+    permission_classes = (AllowAny,)
+    pagination_class = None
+    http_method_names = ['post']
+
+    def create(self, request, *args, **kwargs):
+        try:
+            j = converter_I(request.data['j'], request.data['units_j'])
+            S1 = converter_S(request.data['S1'], request.data['units_S1'])
+            S2 = converter_S(request.data['S2'], request.data['units_S2'])
+            S3 = converter_S(request.data['S3'], request.data['units_S3'])
+            S4 = converter_S(request.data['S4'], request.data['units_S4'])
+            S5 = converter_S(request.data['S5'], request.data['units_S5'])
+            S6 = converter_S(request.data['S6'], request.data['units_S6'])
+            S7 = converter_S(request.data['S7'], request.data['units_S7'])
+            S8 = converter_S(request.data['S8'], request.data['units_S8'])
+            S9 = converter_S(request.data['S9'], request.data['units_S9'])
+            S10 = converter_S(request.data['S10'], request.data['units_S10'])
+            S11 = converter_S(request.data['S11'], request.data['units_S11'])
+            S12 = converter_S(request.data['S12'], request.data['units_S12'])
+            S13 = converter_S(request.data['S13'], request.data['units_S13'])
+            S14 = converter_S(request.data['S14'], request.data['units_S14'])
+            S15 = converter_S(request.data['S15'], request.data['units_S15'])
+            S16 = converter_S(request.data['S16'], request.data['units_S16'])
+            S17 = converter_S(request.data['S17'], request.data['units_S17'])
+            S18 = converter_S(request.data['S18'], request.data['units_S18'])
+            S19 = converter_S(request.data['S19'], request.data['units_S19'])
+            S20 = converter_S(request.data['S20'], request.data['units_S20'])
+            I = j*(S1+S2+S3+S4+S5+S6+S7+S8+S9+S10+S11+S12+S13+S14+S15+S16+S17+S18+S19+S20)
+            serializer = self.get_serializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(I=I)
+            headers = self.get_success_headers(serializer.data)
+            return Response(AmperageSerializerOutput(CurrentDensity.objects.last()).data, status=status.HTTP_201_CREATED)
         except Exception as err:
             return HttpResponse(f'При обработке возникла ошибка: {err}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
