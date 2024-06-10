@@ -258,7 +258,7 @@ class CurrentDensityViewSet(viewsets.ModelViewSet):
             S18 = converter_S(request.data['S18'], request.data['units_S18'])
             S19 = converter_S(request.data['S19'], request.data['units_S19'])
             S20 = converter_S(request.data['S20'], request.data['units_S20'])
-            j = I/(S1+S2+S3+S4+S5+S6+S7+S8+S9+S10+S11+S12+S13+S14+S15+S16+S17+S18+S19+S20)
+            j = (I/(S1+S2+S3+S4+S5+S6+S7+S8+S9+S10+S11+S12+S13+S14+S15+S16+S17+S18+S19+S20))/100
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(j=j)

@@ -109,6 +109,8 @@ class Weight(models.Model):
 class CurrentDensity(models.Model):
     """Модель расчета плотности тока."""
 
+    j = models.DecimalField('Плотность тока', max_digits=15, decimal_places=4, blank=True, null=True)
+    units_j = models.CharField('Единицы плотности тока', max_length=50, blank=True, null=True)
     S1 = models.DecimalField('Площадь покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_S1 = models.CharField('Единицы площади', max_length=50, blank=True, null=True)
     S2 = models.DecimalField('Площадь покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
@@ -149,9 +151,7 @@ class CurrentDensity(models.Model):
     units_S19 = models.CharField('Единицы площади', max_length=50, blank=True, null=True)
     S20 = models.DecimalField('Площадь покрытия', max_digits=15, decimal_places=4, blank=True, null=True)
     units_S20 = models.CharField('Единицы площади', max_length=50, blank=True, null=True)
-    j = models.DecimalField('Плотность тока', max_digits=15, decimal_places=4, blank=True, null=True)
-    units_j = models.CharField('Единицы плотности тока', max_length=50, blank=True, null=True)
-    I = models.DecimalField('Сила тока', max_digits=15, decimal_places=4, blank=True, null=True)
+    I = models.DecimalField('Сила тока А/дм2', max_digits=15, decimal_places=4, blank=True, null=True)
     units_I = models.CharField('Единицы силы тока', max_length=50, blank=True, null=True)
 
     class Meta:
