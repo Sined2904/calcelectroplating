@@ -279,7 +279,7 @@ class AmperageViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         try:
-            j = converter_I(request.data['j'], request.data['units_j'])
+            j = converter_j(request.data['j'], request.data['units_j'])
             S1 = converter_S(request.data['S1'], request.data['units_S1'])
             S2 = converter_S(request.data['S2'], request.data['units_S2'])
             S3 = converter_S(request.data['S3'], request.data['units_S3'])
