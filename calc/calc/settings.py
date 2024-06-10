@@ -15,7 +15,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 LOCAL_DB = bool(os.getenv('LOCAL_DB', default='False') == "True")
 
-CSRF_TRUSTED_ORIGINS = ['*'] #["http://89.111.175.252", "http://127.0.0.1:8000", "http://gal-calc.ru"]
+CSRF_TRUSTED_ORIGINS = ["http://89.111.175.252", "http://127.0.0.1:8000", "https://gal-calc.ru"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 
