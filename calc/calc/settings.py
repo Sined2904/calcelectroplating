@@ -19,7 +19,6 @@ CSRF_TRUSTED_ORIGINS = ["http://89.111.175.252", "http://127.0.0.1:8000", "https
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-
 SPECTACULAR_SETTINGS = {
     'TITLE': 'API калькулятора гальваника',
     'DESCRIPTION': 'Все доступные эндпоинты проекта',
